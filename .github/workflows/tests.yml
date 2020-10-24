@@ -11,7 +11,12 @@ jobs:
       - uses: DeLaGuardo/setup-clojure@master
         with:
           cli: '1.10.1.716'
-      - run: |
-          clojure -M:cljfmt check
-          clojure -M:clj-kondo
-          clojure -M:test
+      - uses: actions/cache@v2
+        with:
+          path: '~/.m2'
+          key: "${{ runner.os }}-maven-${{ hashFiles('deps.edn') }}"
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - run: clojure -M:cljfmt check
+      - run: clojure -M:clj-kondo
+      - run: clojure -M:test
