@@ -19,3 +19,12 @@
                           (throw e))))]
       (result 0)
       (recur (dec retries)))))
+
+(defmacro safe-read
+  "Ignores unexpected end of csv. This can happen when only part of postgresql file is read."
+  [& body]
+  `(try
+     ~@body
+     (catch java.io.EOFException ~'_
+       (binding [*out* *err*]
+         (println "[WARNING]: Invalid end of CSV. Probably caused by reading just part of the log where final entry is not whole.")))))

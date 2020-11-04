@@ -24,8 +24,9 @@
 
 (defn -main [& _]
   (init-portal)
-  (doseq [line (log-reader/read-csv *in*)]
-    (-> line
-        log-parser/line->log
-        format-log
-        tap>)))
+  (log-reader/safe-read
+   (doseq [line (log-reader/read-csv *in*)]
+     (-> line
+         log-parser/line->log
+         format-log
+         tap>))))
