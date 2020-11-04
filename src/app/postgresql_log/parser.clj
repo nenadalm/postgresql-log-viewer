@@ -55,7 +55,7 @@
 
 (defn parse-detail [detail]
   (when detail
-    (if-let [res (re-matches #"(?<type>.*)?: (?<content>.*)" detail)]
+    (if-let [res (re-matches #"(?<type>[^ :]*)?: (?<content>.*)" detail)]
       (let [[_ type content] res]
         {:detail/type type
          :detail/content content})

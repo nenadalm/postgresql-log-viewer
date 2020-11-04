@@ -155,6 +155,9 @@
   (is (= {:detail/type "parameters"
           :detail/content "$1 = 'admin'"}
          (parser/parse-detail "parameters: $1 = 'admin'")))
+  (is (= {:detail/type "parameters"
+          :detail/content "$1 = 'user:admin', '{\"data\": \"dval\"}'"}
+         (parser/parse-detail "parameters: $1 = 'user:admin', '{\"data\": \"dval\"}'")))
   (is (= {:detail/type "unknown"
           :detail/content "some detail"}
          (parser/parse-detail "some detail"))))
