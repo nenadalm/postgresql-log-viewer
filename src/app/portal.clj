@@ -2,8 +2,8 @@
   (:require
    [app.postgresql-log.core :as log]
    [app.postgresql-log.parser :as log-parser]
-   [portal.api :as portal]
-   [clojure.data.csv :as csv]))
+   [app.postgresql-log.reader :as log-reader]
+   [portal.api :as portal]))
 
 (defn- init-portal []
   (.addShutdownHook
@@ -24,7 +24,7 @@
 
 (defn -main [& _]
   (init-portal)
-  (doseq [line (log-parser/drop-invalid-lines (csv/read-csv *in*))]
+  (doseq [line (log-reader/read-csv *in*)]
     (-> line
         log-parser/line->log
         format-log
