@@ -1,14 +1,14 @@
 {:paths ["src"]
  :deps {org.clojure/clojure {:mvn/version "1.10.1"}
         org.clojure/data.csv {:mvn/version "1.0.0"}
-        djblue/portal {:mvn/version "0.6.3"}
         com.github.vertical-blank/sql-formatter {:mvn/version "1.0.3"}}
  :aliases
  {:test {:extra-paths ["test"]
          :extra-deps {lambdaisland/kaocha {:mvn/version "1.0.700"}
                       org.clojure/test.check {:mvn/version "1.1.0"}}
          :main-opts ["-m" "kaocha.runner"]}
-  :portal {:main-opts ["-m" "app.portal"]}
+  :portal {:extra-deps {djblue/portal {:mvn/version "0.6.3"}}
+           :main-opts ["-m" "app.portal"]}
   :cljfmt {:extra-deps {cljfmt/cljfmt {:mvn/version "0.7.0"}}
            :main-opts ["-m" "cljfmt.main"]}
   :clj-kondo {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2020.10.10"}}
