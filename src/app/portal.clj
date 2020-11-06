@@ -5,6 +5,12 @@
    [app.postgresql-log.reader :as log-reader]
    [portal.api :as portal]))
 
+(intern
+ 'portal.runtime
+ 'limit-values
+ (fn [state]
+   (update state :portal/value #(take 100 %))))
+
 (defn- init-portal []
   (.addShutdownHook
    (Runtime/getRuntime)
