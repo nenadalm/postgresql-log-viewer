@@ -19,9 +19,15 @@ tail -f /var/lib/pgsql/data/log/postgresql.csv | clojure -Sdeps '{:deps {github-
 
 ### UI
 
+#### [Portal](https://github.com/djblue/portal#portal)
+
 Command window: `Ctrl+Shift+P` or `Meta+Shift+P`
 
-[Portal](https://github.com/djblue/portal#portal) ui is used. See [this video](https://youtu.be/gByyg-m0XOg?t=175) on how it can be used.
+See [this video](https://youtu.be/gByyg-m0XOg?t=175) on how it can be used.
+
+#### [Reveal](https://vlaaad.github.io/reveal/)
+
+Replace `-M:portal` with `-M:reveal` in usage section in order to use this ui.
 
 ## Requirements
 

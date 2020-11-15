@@ -9,6 +9,8 @@
          :main-opts ["-m" "kaocha.runner"]}
   :portal {:extra-deps {djblue/portal {:mvn/version "0.6.3"}}
            :main-opts ["-m" "app.portal"]}
+  :reveal {:extra-deps {vlaaad/reveal {:mvn/version "1.1.164"}}
+           :main-opts ["-m" "app.reveal"]}
   :cljfmt {:extra-deps {cljfmt/cljfmt {:mvn/version "0.7.0"}}
            :main-opts ["-m" "cljfmt.main"]}
   :clj-kondo {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2020.10.10"}}
