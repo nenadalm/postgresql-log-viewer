@@ -4,14 +4,14 @@
         com.github.vertical-blank/sql-formatter {:mvn/version "1.0.3"}}
  :aliases
  {:test {:extra-paths ["test"]
-         :extra-deps {lambdaisland/kaocha {:mvn/version "1.0.700"}
+         :extra-deps {lambdaisland/kaocha {:mvn/version "1.0.829"}
                       org.clojure/test.check {:mvn/version "1.1.0"}}
          :main-opts ["-m" "kaocha.runner"]}
-  :portal {:extra-deps {djblue/portal {:mvn/version "0.6.3"}}
+  :portal {:extra-deps {djblue/portal {:mvn/version "0.10.0"}}
            :main-opts ["-m" "app.portal"]}
-  :reveal {:extra-deps {vlaaad/reveal {:mvn/version "1.1.164"}}
+  :reveal {:extra-deps {vlaaad/reveal {:mvn/version "1.3.198"}}
            :main-opts ["-m" "app.reveal"]}
   :cljfmt {:extra-deps {cljfmt/cljfmt {:mvn/version "0.7.0"}}
            :main-opts ["-m" "cljfmt.main"]}
-  :clj-kondo {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2020.10.10"}}
+  :clj-kondo {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2021.03.22"}}
               :main-opts ["-m" "clj-kondo.main" "--lint" "src" "test"]}}}
