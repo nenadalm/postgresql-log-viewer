@@ -25,12 +25,13 @@
   :uberjar-reveal {:extra-deps {com.github.seancorfield/depstar {:mvn/version "2.0.193"}}
                    :exec-fn hf.depstar/uberjar
                    :exec-args {:jar "target/plv-reveal.jar"
-                               ;; :aot true
-                               ;; :main-class app.reveal
-                               ;; :compile-ns :all
+                               :aot true
+                               :main-class app.reveal
+                               :compile-ns :all
                                :no-pom true
                                :aliases [:reveal]
-                               :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}}
+                               :jvm-opts ["-Dclojure.compiler.direct-linking=true"
+                                          "-Dcljfx.skip-javafx-initialization=true"]}}
   :cljfmt {:extra-deps {cljfmt/cljfmt {:mvn/version "0.7.0"}}
            :main-opts ["-m" "cljfmt.main"]}
   :clj-kondo {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2021.04.23"}}
