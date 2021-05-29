@@ -22,6 +22,7 @@ jobs:
       - run: clojure -M:clj-kondo
       - run: clojure -M:test
   release:
+    needs: test
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-20.04
     steps:
