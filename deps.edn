@@ -7,10 +7,30 @@
          :extra-deps {lambdaisland/kaocha {:mvn/version "1.0.861"}
                       org.clojure/test.check {:mvn/version "1.1.0"}}
          :main-opts ["-m" "kaocha.runner"]}
-  :portal {:extra-deps {djblue/portal {:mvn/version "0.11.2"}}
+  :portal {:extra-paths ["extra-src/portal"]
+           :extra-deps {djblue/portal {:mvn/version "0.11.2"}}
            :main-opts ["-m" "app.portal"]}
-  :reveal {:extra-deps {vlaaad/reveal {:mvn/version "1.3.209"}}
+  :reveal {:extra-paths ["extra-src/reveal"]
+           :extra-deps {vlaaad/reveal {:mvn/version "1.3.209"}}
            :main-opts ["-m" "app.reveal"]}
+  :uberjar-portal {:extra-deps {com.github.seancorfield/depstar {:mvn/version "2.0.193"}}
+                   :exec-fn hf.depstar/uberjar
+                   :exec-args {:jar "target/plv-portal.jar"
+                               :aot true
+                               :main-class app.portal
+                               :compile-ns :all
+                               :no-pom true
+                               :aliases [:portal]
+                               :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}}
+  :uberjar-reveal {:extra-deps {com.github.seancorfield/depstar {:mvn/version "2.0.193"}}
+                   :exec-fn hf.depstar/uberjar
+                   :exec-args {:jar "target/plv-reveal.jar"
+                               ;; :aot true
+                               ;; :main-class app.reveal
+                               ;; :compile-ns :all
+                               :no-pom true
+                               :aliases [:reveal]
+                               :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}}
   :cljfmt {:extra-deps {cljfmt/cljfmt {:mvn/version "0.7.0"}}
            :main-opts ["-m" "cljfmt.main"]}
   :clj-kondo {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2021.04.23"}}

@@ -3,13 +3,8 @@
    [app.postgresql-log.core :as log]
    [app.postgresql-log.parser :as log-parser]
    [app.postgresql-log.reader :as log-reader]
-   [portal.api :as portal]))
-
-(intern
- 'portal.runtime
- 'limit-values
- (fn [state]
-   (update state :portal/value #(take 100 %))))
+   [portal.api :as portal])
+  (:gen-class))
 
 (defn- init-portal []
   (.addShutdownHook

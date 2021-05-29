@@ -4,7 +4,8 @@
    [app.postgresql-log.parser :as log-parser]
    [app.postgresql-log.reader :as log-reader]
    [vlaaad.reveal :as reveal]
-   [vlaaad.reveal.ext :as ve]))
+   [vlaaad.reveal.ext :as ve])
+  (:gen-class))
 
 (defrecord Text [s])
 
