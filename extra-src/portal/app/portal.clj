@@ -3,6 +3,7 @@
    [app.postgresql-log.core :as log]
    [app.postgresql-log.parser :as log-parser]
    [app.postgresql-log.reader :as log-reader]
+   [app.config :refer [config]]
    [portal.api :as portal])
   (:gen-class))
 
@@ -24,6 +25,9 @@
                                      v))}))
 
 (defn -main [& _]
+  (println (str "App info:\n"
+                "  Version: " (:app.config/version config) "\n"
+                "  UI: portal\n"))
   (init-portal)
   (log-reader/safe-read
    (doseq [line (log-reader/read-csv *in*)]

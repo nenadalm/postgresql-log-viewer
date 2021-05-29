@@ -3,6 +3,7 @@
    [app.postgresql-log.core :as log]
    [app.postgresql-log.parser :as log-parser]
    [app.postgresql-log.reader :as log-reader]
+   [app.config :refer [config]]
    [vlaaad.reveal :as reveal]
    [vlaaad.reveal.ext :as ve])
   (:gen-class))
@@ -30,6 +31,9 @@
                                       v)))}))
 
 (defn -main [& _]
+  (println (str "App info:\n"
+                "  Version: " (:app.config/version config) "\n"
+                "  UI: reveal\n"))
   (init-reveal)
   (log-reader/safe-read
    (doseq [line (log-reader/read-csv *in*)]

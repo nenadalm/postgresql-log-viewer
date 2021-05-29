@@ -11,15 +11,15 @@
 
 ## Usage
 
-Just replace `<sha>` in the following command with some commit hash (probably latest on `master` branch) and you should see opened browser window with postgres logs>
-
-```shell
-tail -f /var/lib/pgsql/data/log/postgresql.csv | clojure -Sdeps '{:deps {github-nenadalm/postgresql-log-viewer {:git/url "https://github.com/nenadalm/postgresql-log-viewer" :sha "<sha>"}}}' -M:portal
-```
+First download jar in [releases](https://github.com/nenadalm/postgresql-log-viewer/releases) then follow instructions for specific ui below.
 
 ### UI
 
 #### [Portal](https://github.com/djblue/portal#portal)
+
+```shell
+tail -f /var/lib/pgsql/data/log/postgresql.csv | java -jar ./plv-portal.jar
+```
 
 Command window: `Ctrl+Shift+P` or `Meta+Shift+P`
 
@@ -27,7 +27,9 @@ See [this video](https://youtu.be/gByyg-m0XOg?t=175) on how it can be used.
 
 #### [Reveal](https://vlaaad.github.io/reveal/)
 
-Replace `-M:portal` with `-M:reveal` in usage section in order to use this ui.
+```shell
+tail -f /var/lib/pgsql/data/log/postgresql.csv | java -jar ./plv-reveal.jar
+```
 
 ## Requirements
 
