@@ -3,10 +3,11 @@
    [app.postgresql-log.parser :as parser]
    [clojure.string])
   (:import
-   [com.github.vertical_blank.sqlformatter SqlFormatter]))
+   [com.github.vertical_blank.sqlformatter SqlFormatter]
+   [com.github.vertical_blank.sqlformatter.languages Dialect]))
 
 (defn- format-query [query]
-  (SqlFormatter/format query))
+  (.format (SqlFormatter/of Dialect/PostgreSql) query))
 
 (defn- inline-params [query params]
   (reduce
