@@ -25,7 +25,8 @@
    :log/query
    :log/query-pos
    :log/location
-   :log/application-name])
+   :log/application-name
+   :log/backend-type])
 
 (defn valid-line? [line]
   (= (count line) (count csv-header)))

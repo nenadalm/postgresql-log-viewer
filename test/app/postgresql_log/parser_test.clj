@@ -27,7 +27,8 @@
                ""
                ""
                ""
-               "PostgreSQL JDBC Driver"])))
+               "PostgreSQL JDBC Driver"
+               "client backend"])))
   (testing "one missing item"
     (is (false? (parser/valid-line?
                  ["2020-10-22 17:54:15.466 CEST"
@@ -45,6 +46,7 @@
                   "00000"
                   "execute <unnamed>: SELECT username FROM user_user WHERE username = $1"
                   "parameters: $1 = 'admin'"
+                  ""
                   ""
                   ""
                   ""

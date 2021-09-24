@@ -33,6 +33,10 @@ tail -f /var/lib/pgsql/data/log/postgresql.csv | java -jar ./plv-reveal.jar
 
 ## Requirements
 
+### Postgresql version
+
+13
+
 ### Postgresl settings
 
 ```
