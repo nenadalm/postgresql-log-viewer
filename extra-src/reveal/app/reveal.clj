@@ -1,8 +1,7 @@
 (ns app.reveal
   (:require
    [app.postgresql-log.core :as log]
-   [app.postgresql-log.parser :as log-parser]
-   [app.postgresql-log.reader :as log-reader]
+   [jsonista.core :as j]
    [app.config :refer [config]]
    [vlaaad.reveal :as reveal]
    [vlaaad.reveal.ext :as ve])
@@ -35,9 +34,9 @@
                 "  Version: " (:app.config/version config) "\n"
                 "  UI: reveal\n"))
   (init-reveal)
-  (log-reader/safe-read
-   (doseq [line (log-reader/read-csv *in*)]
-     (-> line
-         log-parser/line->log
-         format-log
-         tap>))))
+  (loop []
+    (-> (read-line)
+        (j/read-value j/keyword-keys-object-mapper)
+        format-log
+        tap>)
+    (recur)))

@@ -17,10 +17,10 @@
    params))
 
 (defn format-message [log]
-  (let [message (parser/parse-message (:log/message log))]
+  (let [message (parser/parse-message (:message log))]
     (case (:message/type message)
       ("statement" "execute") (format-query
                                (inline-params
                                 (:message/content message)
-                                (parser/parse-detail-params (:log/detail log))))
+                                (parser/parse-detail-params (:detail log))))
       (:message/content message))))

@@ -18,7 +18,7 @@ First download jar in [releases](https://github.com/nenadalm/postgresql-log-view
 #### [Portal](https://github.com/djblue/portal#portal)
 
 ```shell
-tail -f /var/lib/pgsql/data/log/postgresql.csv | java -jar ./plv-portal.jar
+tail -f /var/lib/pgsql/data/log/postgresql-$(date +%a).json | java -jar ./plv-portal.jar
 ```
 
 Command window: `Ctrl+Shift+P` or `Meta+Shift+P`
@@ -28,20 +28,16 @@ See [this video](https://youtu.be/gByyg-m0XOg?t=175) on how it can be used.
 #### [Reveal](https://vlaaad.github.io/reveal/)
 
 ```shell
-tail -f /var/lib/pgsql/data/log/postgresql.csv | java -jar ./plv-reveal.jar
+tail -f /var/lib/pgsql/data/log/postgresql-$(date +%a).json | java -jar ./plv-reveal.jar
 ```
 
 ## Requirements
-
-### Postgresql version
-
-13
 
 ### Postgresl settings
 
 ```
 # this tool parses csv log only
-log_destination = 'csvlog'
+log_destination = 'jsonlog'
 
 # in order to see statements in log, this has to be enabled
 log_statement = 'all'

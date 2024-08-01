@@ -2,49 +2,6 @@
   (:require
    [clojure.string]))
 
-(def ^:private csv-header
-  [:log/log-time
-   :log/user-name
-   :log/database-name
-   :log/process-id
-   :log/connection-from
-   :log/session-id
-   :log/session-line-num
-   :log/command-tag
-   :log/session-start-time
-   :log/virtual-transaction-id
-   :log/transaction-id
-   :log/error-severity
-   :log/sql-state-code
-   :log/message
-   :log/detail
-   :log/hint
-   :log/internal-query
-   :log/internal-query-pos
-   :log/context
-   :log/query
-   :log/query-pos
-   :log/location
-   :log/application-name
-   :log/backend-type])
-
-(defn valid-line? [line]
-  (= (count line) (count csv-header)))
-
-(defn drop-invalid-lines [lines]
-  (drop-while #(not (valid-line? %)) lines))
-
-(defn line->log [line]
-  (reduce-kv
-   (fn [m k v]
-     (if (= "" v)
-       m
-       (assoc m k v)))
-   {}
-   (zipmap
-    csv-header
-    line)))
-
 (defn parse-message [message]
   (when message
     (if-let [res (re-matches #"(?s)(?<type>[^ :]*)[^:]*: (?<s>.*)" message)]

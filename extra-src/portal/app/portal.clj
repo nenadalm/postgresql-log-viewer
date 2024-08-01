@@ -1,8 +1,7 @@
 (ns app.portal
   (:require
    [app.postgresql-log.core :as log]
-   [app.postgresql-log.parser :as log-parser]
-   [app.postgresql-log.reader :as log-reader]
+   [jsonista.core :as j]
    [app.config :refer [config]]
    [portal.api :as portal])
   (:gen-class))
@@ -13,15 +12,15 @@
    (proxy [Thread] []
      (run []
        (portal/close))))
-  (portal/open)
-  (portal/tap))
+  (portal/open {:theme :portal.colors/nord})
+  (add-tap #'portal/submit))
 
 (defn- format-log [log]
   (with-meta
     log
     {'clojure.core.protocols/nav (fn [_ k v]
                                    (case k
-                                     :log/message (log/format-message log)
+                                     :message (log/format-message log)
                                      v))}))
 
 (defn -main [& _]
@@ -29,9 +28,9 @@
                 "  Version: " (:app.config/version config) "\n"
                 "  UI: portal\n"))
   (init-portal)
-  (log-reader/safe-read
-   (doseq [line (log-reader/read-csv *in*)]
-     (-> line
-         log-parser/line->log
-         format-log
-         tap>))))
+  (loop []
+    (-> (read-line)
+        (j/read-value j/keyword-keys-object-mapper)
+        format-log
+        tap>)
+    (recur)))
