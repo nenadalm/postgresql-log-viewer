@@ -3,7 +3,8 @@
    [app.postgresql-log.core :as log]
    [jsonista.core :as j]
    [app.config :refer [config]]
-   [portal.api :as portal])
+   [portal.api :as portal]
+   [portal.viewer :as v])
   (:gen-class))
 
 (defn- init-portal []
@@ -20,7 +21,7 @@
     log
     {'clojure.core.protocols/nav (fn [_ k v]
                                    (case k
-                                     :message (log/format-message log)
+                                     :message (v/text (log/format-message log))
                                      v))}))
 
 (defn -main [& _]

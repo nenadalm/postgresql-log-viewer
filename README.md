@@ -36,7 +36,7 @@ tail -f /var/lib/pgsql/data/log/postgresql-$(date +%a).json | java -jar ./plv-re
 ### Postgresl settings
 
 ```
-# this tool parses csv log only
+# this tool parses json log only
 log_destination = 'jsonlog'
 
 # in order to see statements in log, this has to be enabled
