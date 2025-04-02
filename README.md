@@ -46,4 +46,4 @@ log_statement = 'all'
 ### Installed software
 
 - [Google Chrome](https://www.google.com/chrome/) or [Chromium](https://www.chromium.org/Home)
-- [Clojure cli tools](https://clojure.org/guides/getting_started#_clojure_installer_and_cli_tools)
+- [Clojure cli tools](https://clojure.org/guides/getting_started#_clojure_installer_and_cli_tools) - required only when running from source
