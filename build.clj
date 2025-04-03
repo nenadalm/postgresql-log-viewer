@@ -32,7 +32,8 @@
     (b/compile-clj
      {:basis basis
       :class-dir class-dir
-      :compile-opts {:direct-linking true}})
+      :compile-opts {:direct-linking true}
+      :java-opts ["-Dcljfx.skip-javafx-initialization=true"]})
     (b/uber
      {:basis basis
       :class-dir class-dir
