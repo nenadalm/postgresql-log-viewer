@@ -1,10 +1,10 @@
 SOURCES := $(shell find deps.edn src/ extra-src/ test/ -type f)
 
 target/plv-portal.jar: ${SOURCES}
-	clojure -X:uberjar-portal
+	clojure -T:build uberjar-portal
 
 target/plv-reveal.jar: ${SOURCES}
-	clojure -X:uberjar-reveal
+	clojure -T:build uberjar-reveal
 
 .PHONY: test
 test:
@@ -14,4 +14,4 @@ test:
 
 .PHONY: clean
 clean:
-	rm -rf target
+	clojure -T:build clean
