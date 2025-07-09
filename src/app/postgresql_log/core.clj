@@ -6,8 +6,17 @@
    [com.github.vertical_blank.sqlformatter SqlFormatter]
    [com.github.vertical_blank.sqlformatter.languages Dialect]))
 
+;; SELECT STRING_AGG(DISTINCT CONCAT('"', "oprname", '"'), ' ') FROM "pg_operator"
+(def ^{:private true} operators
+  (into-array String ["!!" "!~" "!~*" "!~~" "!~~*" "#" "##" "#-" "#<#" "#<=#" "#=" "#>" "#>#" "#>=#" "#>>" "%" "%#" "%%" "&" "&&" "&<" "&<|" "&>" "*" "*<" "*<=" "*<>" "*=" "*>" "*>=" "+" "-" "->" "->>" "-|-" "/" "<" "<->" "<<" "<<=" "<<|" "<=" "<>" "<@" "<^" "=" ">" ">=" ">>" ">>=" ">^" "?" "?#" "?&" "?-" "?-|" "?|" "?||" "@" "@-@" "@>" "@?" "@@" "@@@" "^" "^@" "|" "|&>" "|/" "|>>" "||" "||/" "~" "~*" "~<=~" "~<~" "~=" "~>=~" "~>~" "~~" "~~*"]))
+
 (defn- format-query [query]
-  (.format (SqlFormatter/of Dialect/PostgreSql) query))
+  (-> (SqlFormatter/of Dialect/PostgreSql)
+      (.extend (fn [cfg]
+                 (-> cfg
+                     (.plusOperators (into-array String ["=>"])) ;; named parameters
+                     (.plusOperators operators))))
+      (.format query)))
 
 (defn- inline-params [query params]
   (reduce
