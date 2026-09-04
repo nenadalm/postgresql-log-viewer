@@ -33,17 +33,42 @@ tail -f /var/lib/pgsql/data/log/postgresql-$(date +%a).json | java -jar ./plv-re
 
 ## Requirements
 
-### Postgresl settings
+### Postgresql settings
 
+#### file
 ```
 # this tool parses json log only
 log_destination = 'jsonlog'
 
 # in order to see statements in log, this has to be enabled
 log_statement = 'all'
+
+# log to a file
+logging_collector = on
+log_filename = 'postgresql-%a.log'
+```
+
+### sql
+```
+-- this tool parses json log only
+ALTER SYSTEM SET "log_destination" = 'jsonlog';
+
+-- in order to see statements in log, this has to be enabled
+ALTER SYSTEM SET "log_statement" = 'all';
+
+-- log to a file
+ALTER SYSTEM SET "logging_collector" = 'on';
+ALTER SYSTEM SET "log_filename" = 'postgresql-%a.log';
 ```
 
 ### Installed software
 
 - [Google Chrome](https://www.google.com/chrome/) or [Chromium](https://www.chromium.org/Home)
 - [Clojure cli tools](https://clojure.org/guides/getting_started#_clojure_installer_and_cli_tools) - required only when running from source
+
+
+## Docker usage
+
+```
+docker exec <name> bash -c 'tail -f ${PGDATA}/log/postgresql-$(date +%a).json' | clojure -M:portal
+```
