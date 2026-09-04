@@ -15,6 +15,17 @@ WHERE
            (core/format-message
             {:detail "parameters: $1 = 'admin', $2 = 3"
              :message "execute <unnamed>: SELECT username FROM user_user WHERE username = $1 AND id = $3"}))))
+  (testing "query with params with big P"
+    (is (= "SELECT
+  username
+FROM
+  user_user
+WHERE
+  username = 'admin'
+  AND id = $3"
+           (core/format-message
+            {:detail "Parameters: $1 = 'admin', $2 = 3"
+             :message "execute <unnamed>: SELECT username FROM user_user WHERE username = $1 AND id = $3"}))))
   (testing "query with problematic json operator"
     (is (= "SELECT
   '{\"a\": 1}' :: jsonb -> 'a'"

@@ -1,6 +1,6 @@
 (ns app.postgresql-log.parser
   (:require
-   [clojure.string]))
+   [clojure.string :as str]))
 
 (defn parse-message [message]
   (when message
@@ -15,7 +15,7 @@
   (when detail
     (if-let [res (re-matches #"(?<type>[^ :]*)?: (?<content>.*)" detail)]
       (let [[_ type content] res]
-        {:detail/type type
+        {:detail/type (str/lower-case type)
          :detail/content content})
       {:detail/type "unknown"
        :detail/content detail})))
